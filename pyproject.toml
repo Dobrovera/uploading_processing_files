@@ -3,6 +3,9 @@ name = "uploading_processing_files"
 version = "0.1.0"
 description = ""
 authors = ["Vera Dobrodeeva <dobro.vera@gmail.com>"]
+packages = [
+  { include = "uploading_processing" },
+]
 
 [tool.poetry.dependencies]
 python = "^3.8"
@@ -14,6 +17,8 @@ djangorestframework-simplejwt = "^5.3.0"
 celery = "^5.3.4"
 redis = "^5.0.1"
 importlib-metadata = "4.13.0"
+coverage = "^7.3.1"
+Pillow = "^10.0.1"
 
 [tool.poetry.dev-dependencies]
 

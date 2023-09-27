@@ -1,5 +1,5 @@
 """
-ASGI config for uploading_processing_files project.
+ASGI config for uploading_processing project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'uploading_processing_files.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'uploading_processing.settings')
 
 application = get_asgi_application()
