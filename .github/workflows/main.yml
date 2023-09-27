@@ -1,28 +1,5 @@
-name: build
-on: push
-jobs:
-  build:
-    runs-on: ubuntu-latest
-      steps:
-          - name: Check out repository code
-            uses: actions/checkout@v3
-              - name: install dependencies
-                run: |
-                  pip install poetry pytest
-              - name: build
-                run: poetry build
-              - name: upgrade pip
-                run: python3 -m pip install --upgrade pip
-              - name: package-install
-                run: python3 -m pip install --force dist/*.whl
-
-              - name: Run test
-                env:
-                run: coverage run manage.py test
-              - name: test coverage
-                uses: paambaati/codeclimate-action@v3.0.0
-                env:
-                  CC_TEST_REPORTER_ID: 564249101de35a00aaec87328a864b700eb2a106eeeff35f6b73e204f438e700
-                with:
-                  coverageCommand: coverage xml
-                  debug: true
+steps:
+  - name: Test & publish code coverage
+    uses: paambaati/codeclimate-action@v5.0.0
+    env:
+      CC_TEST_REPORTER_ID: 564249101de35a00aaec87328a864b700eb2a106eeeff35f6b73e204f438e700
