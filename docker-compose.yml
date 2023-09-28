@@ -1,7 +1,29 @@
 version: '3.8'
+
 services:
-   web:
-       build: .
-       command: python3 manage.py runserver localhost:8000
-       ports:
-           - 8000:8000
+
+  redis:
+      image: redis:5.0.1
+      hostname: redis
+      ports:
+        - "6379:6379"
+
+  worker:
+      build:
+        context: .
+        dockerfile: Dockerfile
+      command:  python3 -m celery -A uploading_processing worker -l debug
+      volumes:
+        - ./src:/app
+      environment:
+        - CELERY_BROKER_URL="redis://redis:6379"
+        - CELERY_RESULT_BACKEND="redis://redis:6379"
+      depends_on:
+        - web
+        - redis
+
+  web:
+    build: .
+    command: python3 manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"

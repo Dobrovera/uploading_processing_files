@@ -1,7 +1,8 @@
+import logging
+
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.parsers import MultiPartParser, FormParser
 
 from .models import File
 from .serializers import FileSerializer
@@ -9,9 +10,9 @@ from .tasks import process_file
 
 
 class FileUploadView(APIView):
+
     queryset = File.objects.all()
     serializer_class = FileSerializer
-    parser_classes = (MultiPartParser, FormParser, )
 
     def post(self, request):
         file = request.FILES.get('file')
@@ -23,9 +24,15 @@ class FileUploadView(APIView):
 
 
 class FileGetView(APIView):
+
     queryset = File.objects.all()
     serializer_class = FileSerializer
 
     def get(self, request):
-        values = File.objects.all().values()
-        return Response({'all_files': list(values)})
+        try:
+            values = File.objects.all().values()
+            return Response({'all_files': list(values)})
+        except TimeoutError:
+            logging.error('Something is going wrong! '
+                          'Possible problems with the database')
+            return status.HTTP_500_INTERNAL_SERVER_ERROR
