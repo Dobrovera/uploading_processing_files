@@ -4,9 +4,9 @@
 
 Simple Django REST API to upload files to the server and then process them asynchronously using Celery.
 
-#### [link](85.143.223.201:8000) to the domain
+[link](http://85.143.223.201:8000/files) to the domain
 
-###For What?
+### For What?
 There are 2 endpoints:
 <li>files/ — returns a list of all files in db and their data (GET request)
 </li>
