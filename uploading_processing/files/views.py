@@ -2,11 +2,11 @@ from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser
-import pickle
 
 from .models import File
 from .serializers import FileSerializer
 from .tasks import process_file
+
 
 class FileUploadView(APIView):
     queryset = File.objects.all()
@@ -16,9 +16,9 @@ class FileUploadView(APIView):
     def post(self, request):
         file = request.FILES.get('file')
         if file:
-            File.objects.create(file=file)
-            process_file(file)
-            return Response({'serialize_data': File.objects.filter(file=file).values()},
+            file_object = File.objects.create(file=file)
+            process_file.apply_async((file_object.id,))
+            return Response({'serialize_data': File.objects.filter(id=file_object.id).values()},
                             status=status.HTTP_201_CREATED)
 
 

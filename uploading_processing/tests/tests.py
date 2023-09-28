@@ -1,14 +1,8 @@
 import io
-import unittest
 
 from rest_framework.test import APITestCase
-from django.urls import reverse
 from PIL import Image
 from rest_framework import status
-
-
-
-from uploading_processing.files.models import File
 
 
 class TestUpload(APITestCase):
@@ -30,11 +24,3 @@ class TestUpload(APITestCase):
         }
         response = self.client.post(self.endpoint, data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-
-
-class TestFiles(APITestCase):
-
-    endpoint = '/files/'
-
-    def test_files(self):
-        pass
