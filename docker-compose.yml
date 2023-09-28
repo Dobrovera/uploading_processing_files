@@ -11,13 +11,12 @@ services:
   worker:
       build:
         context: .
-        dockerfile: Dockerfile
+      hostname: worker
       command:  python3 -m celery -A uploading_processing worker -l debug
       volumes:
-        - ./src:/app
-      environment:
-        - CELERY_BROKER_URL="redis://redis:6379"
-        - CELERY_RESULT_BACKEND="redis://redis:6379"
+        - ./service:/service
+      links:
+        - redis
       depends_on:
         - web
         - redis

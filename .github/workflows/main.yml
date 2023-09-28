@@ -23,4 +23,3 @@ jobs:
           with:
             coverageCommand: coverage xml
             debug: true
-
