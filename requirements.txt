@@ -29,6 +29,7 @@ PyJWT==2.8.0
 python-dateutil==2.8.2
 pytz==2023.3.post1
 redis==5.0.1
+redis-server==6.0.9
 requests==2.31.0
 setuptools==68.1.2
 six==1.16.0
