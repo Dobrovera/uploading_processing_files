@@ -6,14 +6,9 @@ Simple Django REST API to upload files to the server and then process them async
 
 [link](http://85.143.223.201:8000/files) to the domain
 
-### For What?
+### How it works?
 There are 2 endpoints:
-<li>files/ — returns a list of all files in db and their data (GET request)
-</li>
-<li>upload/ — downloading a file and adding it to the database
+* [files/](http://85.143.223.201:8000/files/) — returns a list of all files in db and their data (GET request)
+
+* [upload/](http://85.143.223.201:8000/upload/) — downloading a file and adding it to the database
 (POST request). Asynchronous process processes file status with a delay of 10 seconds
-</li>
-
-[!(renamed webm)](video/video.mp4)
-
-
